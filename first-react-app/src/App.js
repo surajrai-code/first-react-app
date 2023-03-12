@@ -1,23 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+// import logo from './logo.svg';
+import React,{useState} from 'react';
 
-function App() {
+import './App.css';
+import ExpanseForm from './components/ExpanseForm';
+import ExpanseList from './components/ExpanseList';
+const App=()=>{
+  const [expanseList,setExpanseList]=useState([]);
+  const addExpanseHandler=(uAmount,uDiscription,uOption)=>{
+      setExpanseList((prevExpanseList)=>{
+        return[...prevExpanseList,{Amount:uAmount,Discription:uDiscription,Option:uOption,id: Math.random().toString()}]
+      })
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <ExpanseForm onAddExpanse={addExpanseHandler} />
+        <ExpanseList Expanses={expanseList}/>
     </div>
   );
 }
